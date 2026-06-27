@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L Digital Learning | Premium Online Video Lessons</title>
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* --- Core Variable Framework --- */
+    :root {
+      --bg-main: #0B0F19;
+      --bg-surface: #161F30;
+      --bg-surface-hover: #1E2B44;
+      --primary: #10B981;
+      /* Premium Emerald Green */
+      --primary-glow: rgba(16, 185, 129, 0.2);
+      --text-primary: #FFFFFF;
+      --text-muted: #94A3B8;
+      --border-color: #24324D;
+      --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* --- Base Layout Rules --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* --- Header Navigation --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 5%;
+      border-bottom: 1px solid var(--border-color);
+      background-color: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo .accent {
+      color: var(--primary);
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 1.25rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    /* --- Buttons System --- */
+    .btn-primary {
+      background-color: var(--primary);
+      color: #000000;
+      font-weight: 600;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-surface);
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-right: 1rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .btn-text:hover {
+      color: var(--text-primary);
+    }
+
+    /* --- Hero Showcase --- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 5rem 5% 6rem 5%;
+      align-items: center;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      background-color: var(--bg-surface);
+      color: var(--primary);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-color);
+      width: fit-content;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #FFF 30%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-large {
+      padding: 0.85rem 1.75rem;
+      font-size: 1rem;
+    }
+
+    /* Video Frame Showcase */
+    .video-container {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border-radius: 12px;
+      padding: 6px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16 / 9;
+      background-color: #030712;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .play-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      opacity: 0.85;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .video-placeholder:hover .play-icon {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .video-overlay-text {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* --- Premium Lesson Cards Grid --- */
+    .courses-section {
+      padding: 4rem 5% 6rem 5%;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .course-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .card-thumbnail {
+      height: 180px;
+      background: linear-gradient(135deg, #1E1B4B 0%, #311042 100%);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-thumbnail.graphic-design {
+      background: linear-gradient(135deg, #064E3B 0%, #111827 100%);
+    }
+
+    .card-thumbnail.business-tech {
+      background: linear-gradient(135deg, #111827 0%, #374151 100%);
+    }
+
+    .preview-type-icon {
+      font-size: 3rem;
+      opacity: 0.25;
+      color: var(--text-primary);
+      transition: transform 0.3s ease;
+    }
+
+    .course-card:hover .preview-type-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .thumbnail-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background-color: var(--primary);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .card-meta i {
+      color: var(--primary);
+    }
+
+    .course-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .course-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+      min-height: 4.2em;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .old-price {
+      font-size: 0.9rem;
+      font-weight: 400;
+      text-decoration: line-through;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+    }
+
+    .btn-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .course-card:hover .btn-card {
+      background-color: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+    }
+
+    /* --- Premium Video Modal Player Overlay --- */
+    .video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(3, 7, 18, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .video-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      width: 90%;
+      max-width: 850px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .video-modal.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 1rem 1.5rem;
+      background-color: rgba(11, 15, 25, 0.5);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .close-modal:hover {
+      color: #EF4444;
+    }
+
+    .modal-video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      display: flex;
+    }
+
+    .modal-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      outline: none;
+    }
+
+    /* --- Floating Utilities --- */
+    .floating-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+    }
+
+    .btn-floating {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      color: #000;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-floating:hover {
+      transform: scale(1.08);
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 968px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 3rem;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero p {
+        margin: 0 auto 2rem auto;
+      }
+
+      .hero-cta {
+        justify-content: center;
+      }
+
+      .badge {
+        margin: 0 auto 1.5rem auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .nav-links a {
+        margin: 0 0.5rem;
+      }
+
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header / Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="accent">L</span> Digital Learning
+    </div>
+    <nav class="nav-links">
+      <a href="#courses" class="active">Courses</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-text">Sign In</button>
+      <button class="btn-primary">Get Started</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge"><i class="fa-solid fa-sparkles"></i> Premium E-Learning Experience</span>
+      <h1>Master Digital Skills With <span class="text-gradient">Expert Video Lessons</span></h1>
+      <p>Access studio-quality tutorials on coding, design, and business systems. Learn at your own pace with industry experts.</p>
+      <div class="hero-cta">
+        <a href="#courses" style="text-decoration: none;">
+          <button class="btn-primary btn-large">Explore All Courses <i class="fa-solid fa-arrow-right"></i></button>
+        </a>
+        <button class="btn-secondary btn-large launch-preview" data-video="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-screen-close-up-42240-large.mp4" data-title="L Digital Learning - Platform Preview Masterclass"><i class="fa-solid fa-play"></i> Watch Preview</button>
+      </div>
+    </div>
+    <div class="hero-video-preview">
+      <div class="video-container">
+        <div class="video-placeholder launch-preview" data-video="webca.mp4" data-title="L Digital Learning - Platform Preview Masterclass">
+          <i class="fa-solid fa-circle-play play-icon"></i>
+          <div class="video-overlay-text">Intro to Premium Learning</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Courses Grid -->
+  <section id="courses" class="courses-section">
+    <div class="section-header">
+      <h2>Featured <span class="text-gradient">Premium Lessons</span></h2>
+      <p>Click on any course below to play the premium video walkthrough module.</p>
+    </div>
+
+    <div class="course-grid">
+      <!-- Course Card 1 -->
+      <div class="course-card launch-preview" data-video="https://assets.mixkit.co/videos/preview/mixkit-typing-code-on-a-backlit-keyboard-41982-large.mp4" data-title="Lesson Preview: Advanced Web Development & UI Layouts">
+        <div class="card-thumbnail">
+          <div class="thumbnail-badge">New</div>
+          <i class="fa-solid fa-laptop-code preview-type-icon"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span><i class="fa-regular fa-clock"></i> 12h 45m</span>
+            <span><i class="fa-regular fa-file-video"></i> 24 Lessons</span>
+          </div>
+          <h3>Advanced Web Development & UI Layouts</h3>
+          <p>Master modern Flexbox, CSS Grid, media queries, and responsive dashboard architecture from scratch.</p>
+          <div class="card-footer">
+            <span class="price">K250 <span class="old-price">K400</span></span>
+            <button class="btn-card"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Card 2 -->
+      <div class="course-card launch-preview" data-video="https://assets.mixkit.co/videos/preview/mixkit-designer-working-on-a-digital-tablet-and-computer-42352-large.mp4" data-title="Lesson Preview: Premium Graphic Design & Branding">
+        <div class="card-thumbnail graphic-design">
+          <div class="thumbnail-badge">Popular</div>
+          <i class="fa-solid fa-palette preview-type-icon"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span><i class="fa-regular fa-clock"></i> 8h 15m</span>
+            <span><i class="fa-regular fa-file-video"></i> 16 Lessons</span>
+          </div>
+          <h3>Premium Graphic Design & Branding</h3>
+          <p>Learn visual balance, corporate social media layouts, and advanced vector asset preparation assets.</p>
+          <div class="card-footer">
+            <span class="price">K180 <span class="old-price">K300</span></span>
+            <button class="btn-card"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Card 3 -->
+      <div class="course-card launch-preview" data-video="https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-financial-spreadsheet-on-laptop-42173-large.mp4" data-title="Lesson Preview: Corporate Compliance & Systems">
+        <div class="card-thumbnail business-tech">
+          <i class="fa-solid fa-briefcase preview-type-icon"></i>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span><i class="fa-regular fa-clock"></i> 6h 30m</span>
+            <span><i class="fa-regular fa-file-video"></i> 10 Lessons</span>
+          </div>
+          <h3>Corporate Compliance & Systems</h3>
+          <p>A comprehensive walkthrough on standard business setup, registrations, and portal filings step-by-step.</p>
+          <div class="card-footer">
+            <span class="price">K300</span>
+            <button class="btn-card"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Native Video Player Modal Overlay Layer -->
+  <div class="video-modal" id="premiumVideoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="modalVideoTitle">Course Lesson Preview</h4>
+        <button class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-video-wrapper">
+        <!-- Native MP4 Video Engine Configured Here -->
+        <video id="modalVideoPlayer" controls controlsList="nodownload" playsinline>
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Quick Actions -->
+  <div class="floating-container">
+    <button class="btn-floating" title="Contact Support">
+      <i class="fa-solid fa-comment-dots"></i>
+    </button>
+  </div>
+
+  <!-- Interactive Video Control Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('premiumVideoModal');
+      const videoPlayer = document.getElementById('modalVideoPlayer');
+      const videoSource = videoPlayer.querySelector('source');
+      const modalTitle = document.getElementById('modalVideoTitle');
+      const closeBtn = document.getElementById('closeModalBtn');
+      const previewTriggers = document.querySelectorAll('.launch-preview');
+      // Open Video Event Manager
+      previewTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          // Prevent nested interactive events
+          e.stopPropagation();
+          const targetedVideoUrl = trigger.getAttribute('data-video');
+          const targetedTitle = trigger.getAttribute('data-title');
+          if (targetedVideoUrl) {
+            // Dynamically update the MP4 source inside the video node
+            videoSource.setAttribute('src', targetedVideoUrl);
+            modalTitle.textContent = targetedTitle;
+            // Force structural reload and play media track
+            videoPlayer.load();
+            modal.classList.add('active');
+            // Handle auto-play safety rules on modern browsers
+            videoPlayer.play().catch(error => {
+              console.log("Auto-play blocked by client environment rules. Waiting for manual play click.");
+            });
+          }
+        });
+      });
+      // Shutdown Media & UI Event
+      const shutdownModalMedia = () => {
+        modal.classList.remove('active');
+        videoPlayer.pause();
+        videoSource.setAttribute('src', '');
+      };
+      closeBtn.addEventListener('click', shutdownModalMedia);
+      // Close modal when user clicks outside the core layout surface
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          shutdownModalMedia();
+        }
+      });
+      // Handle hardware escape key events smoothly
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          shutdownModalMedia();
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
